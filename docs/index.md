@@ -51,7 +51,7 @@ will divide each group of four students into two sub-groups with two
 students each. One sub-group will focus on building the IoT input device
 and the other sub-group will focus on building the IoT output device.
 Each sub-group will start by just building a very basic
-non-internet-connected device that uses an LED and button. The sub-groups
+non-internet-connected device that uses an LED and a button. The sub-groups
 will then experiment with the corresponding sensor (i.e., IR rangefinder)
 or actuator (i.e., sevor motor). Then the sub-groups will come together
 to combine the IoT input device with the IoT output device to create the
@@ -122,7 +122,7 @@ The password is `particle070`. You should see the Particle programming
 environment. There is a set of buttons on the left. We will primarily be
 using the flash button (lighting bolt, used for programming the Photon
 board), the save button (folder icon, used for saving your program in the
-cloud), the code view button (`<>` icon, used for actually enter in your
+cloud), the code view button (`<>` icon, used to actually enter in your
 code), and the show devices button (target icon, used for choosing which
 Photon board you want to program). Before continuing you need to select
 the correct Photon board. Click on the devices button, and click on the
@@ -220,7 +220,7 @@ circuit.
 ![](assets/fig/part2-circuit.jpg)
 
 We connect two jumper wires to the button. One goes to the GND pin (shown
-using a blue jumper wire in the photo), and the ohter goes to the D5 pin
+using a blue jumper wire in the photo), and the other goes to the D5 pin
 (shown using the purple jumper wire in the photo). The Photon board will
 be able to detect when the button is or is not pressed, and then we can
 use the software running on the Photon board to update the status of the
@@ -284,12 +284,12 @@ implementation of the IR rangefinder circuit.
 ![](assets/fig/part3a-circuit.jpg)
 
 We plug the IR rangefinder into the breadboard and then connect its three
-pins to the Photon board. Make sure your orient the IR rangefinder pins
+pins to the Photon board. Make sure you orient the IR rangefinder pins
 correctly into the breadboard (with the orange wire on top). Then connect
 the orange wire of the IR rangefinder to pin A0 (shown using the orange
 jumper wire in the photo), connect the red wire of the IR rangefinder to
 the 3.3V pin (shown using the red jumper wire in the photo), and connect
-the blank wire of the IR rangefinder to the GND pin on the right side of
+the black wire of the IR rangefinder to the GND pin on the right side of
 the Photon board (shown using the black jumper wire in the photo). You
 might want to have an instructor double check your work. Once you have
 added your IR rangefinder, then modify your code as shown below.
