@@ -4,8 +4,9 @@ ENGRG 1050: Computer Engineering Mini-Lab
 
  - Author: Philip Bedoukian, Christopher Batten
  - Date: October 24, 2018
+ - URL: https://cornell-brg.github.io/engrg1050-mini-lab
 
-**Table of Contents**
+**Tableof Contents**
 
  - Introduction
  - Part 1. Blinking an LED
