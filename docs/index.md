@@ -426,7 +426,7 @@ Spark.publish("ir","motion",10,PRIVATE);
 This statement sends a message named "ir" to the cloud every time the IR
 rangefinder returns a value above the threshold. You can verify this is
 working by watching the console. Click on the console button and you
-should see a "ir/motion" even show up every time you trigger the IR
+should see a "ir/motion" event show up every time you trigger the IR
 rangefinder.
 
 _Sign-Off Milestone:_ Once you have verified that your IoT input device
@@ -488,7 +488,7 @@ void move_servo( const char *event, const char *data )
 Notice that the `loop` routine is empty, and we have added a new
 `move_servo` routine. The `Particle.subscribe` routine is used to tell
 the IoT cloud that we would like this Photon board to receive "ir"
-messages from the IoT cloud, and that when we receive such a message the
+messages from the IoT cloud, and that when we receive such a message, the
 system should automatically call the `move_servo` routine. So instead of
 using the `loop` routine to control our Photon board, we will instead
 setup our code so that the `move_servo` routine is called whenever a
@@ -506,7 +506,7 @@ Part 5. Putting Together the IoT System
 We are now ready to put together the IoT input device and the IoT output
 device into a complete IoT system! All we need to do is have the IoT
 output sub-group download their code to their Photon board. Try
-triggering the IR rangefinder on the IoT input device, verify the LED on
+triggering the IR rangefinder on the IoT input device, verify that the LED on
 the IoT input device goes on, use the console to see that the message was
 sent into the IoT cloud, verify that the LED on the IoT output device
 goes on, and then confirm that the servo rotates. Once this all works, it is now time to polish up the IoT system a bit.
