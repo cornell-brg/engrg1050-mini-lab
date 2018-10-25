@@ -524,5 +524,6 @@ that when the servo moves it swings the rod. Request a tabletop wind
 chime from the instructors. Duct tape the servo to the lab bench so that
 when the rod swings it gently rings the tabletop wind chime.
 
-Test the whole thing out and make a video to share with your friends!
+_Sign-Off Milestone:_ Have an instructor verify the whole system works.
+Make a video to share with your friends!
 
