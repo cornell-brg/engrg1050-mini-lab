@@ -6,7 +6,7 @@ ENGRG 1050: Computer Engineering Mini-Lab
  - Date: October 24, 2018
  - URL: https://cornell-brg.github.io/engrg1050-mini-lab
 
-**Tableof Contents**
+**Table of Contents**
 
  - Introduction
  - Part 1. Blinking an LED
@@ -127,7 +127,7 @@ sent to the IoT cloud), and the show devices button (target icon, used
 for choosing which Photon board you want to program). Before continuing
 you need to select the correct Photon board. Click on the devices button,
 and click on the star next to `photon.group.0X.A` if you are an IoT input
-sub-group and the start next `photon.group.0X.B` if you are an IoT output
+sub-group and the star next to `photon.group.0X.B` if you are an IoT output
 sub-group. Then click on the code button to go to the code view.
 
 Here is the code we will be using for the first part:
@@ -178,7 +178,7 @@ that the variable named `pin_led` should be assigned the value `D6`. From
 then on, whenever we use the name `pin_led` it will be interpreted as the
 value `D6`. We also need to specify the "type" of this variable. In this
 case, the type is `int` which indicates that this variable will store
-integer values. Effectively, what we are doing is saying that LED on the
+integer values. Effectively, we are saying that the LED on the
 breadboard is wired up to digital input `D6` on the Arduino board. Verify
 that there is a wire connecting the female header location labeled "D6"
 on the Photon board to one end of the resistor on the breadboard.
