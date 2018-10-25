@@ -14,13 +14,14 @@ ENGRG 1050: Computer Engineering Mini-Lab
  - Part 3b. Using a Button to Turn Servo Motor
  - Part 4a. Using an IR Sensor to Send IoT Message
  - Part 4b. Using an IoT Message to Turn Servo Motor
+ - Part 5. Putting Together the IoT System
 
 Introduction
 --------------------------------------------------------------------------
 
 The field of computer engineering is at the interface between hardware
 and software and seeks to balance the tension between application
-requirements and technology constraints. This lab includes four parts
+requirements and technology constraints. This lab includes five parts
 that should enable you to appreciate how hardware and software come
 together to create a complete Internet-of-Things (IoT) system. The
 following figure illustrates the high-level template such an IoT system.
@@ -53,7 +54,7 @@ and the other sub-group will focus on building the IoT output device.
 Each sub-group will start by just building a very basic
 non-internet-connected device that uses an LED and a button. The sub-groups
 will then experiment with the corresponding sensor (i.e., IR rangefinder)
-or actuator (i.e., sevor motor). Then the sub-groups will come together
+or actuator (i.e., servo motor). Then the sub-groups will come together
 to combine the IoT input device with the IoT output device to create the
 complete IoT system.
 
@@ -73,14 +74,11 @@ materials before continuing.
  - IR rangefinder (for IoT input sub-group)
  - Servo Motor (for IoT output sub-group)
 
-The following photo illustrates the Photon board and solderless
-breadboard. Notice there are strips of female "header" along both sides
-of the Photon board; you can insert jumper wires into the holes in this
-header in order to connect various hardware components to the Photon
-board. The Photon board can be powered either through the USB cable or
-via a 9V battery.
-
-**FIG: Board Photo**
+Take a closer look at the Photon board and solderless breadboard. Notice
+there are strips of female "header" along both sides of the Photon board;
+you can insert jumper wires into the holes in this header in order to
+connect various hardware components to the Photon board. The Photon board
+can be powered either through the USB cable or via a 9V battery.
 
 The Photon is "Arduino-compatible" which means we will be using the same
 programming language as in the very popular Arduino microcontroller
@@ -120,15 +118,16 @@ the breadboard. Go to <https://build.particle.io/build> and login with
 the username `photon.group.0X@gmail.com` where `X` is your group number.
 The password is `particle070`. You should see the Particle programming
 environment. There is a set of buttons on the left. We will primarily be
-using the flash button (lighting bolt, used for programming the Photon
-board), the save button (folder icon, used for saving your program in the
-cloud), the code view button (`<>` icon, used to actually enter in your
-code), and the show devices button (target icon, used for choosing which
-Photon board you want to program). Before continuing you need to select
-the correct Photon board. Click on the devices button, and click on the
-star next to `photon.group.0X.A` if you are an IoT input sub-group and
-the start next `photon.group.0X.B` if you are an IoT output sub-group.
-Then click on the code button to go to the code view.
+using the flash button (lighting bolt icon, used for programming the
+Photon board), the save button (folder icon, used for saving your program
+in the cloud), the code view button (`<>` icon, used to actually enter in
+your code), the console button (bar graph icon, used to monitor messages
+sent to the IoT cloud), and the show devices button (target icon, used
+for choosing which Photon board you want to program). Before continuing
+you need to select the correct Photon board. Click on the devices button,
+and click on the star next to `photon.group.0X.A` if you are an IoT input
+sub-group and the start next `photon.group.0X.B` if you are an IoT output
+sub-group. Then click on the code button to go to the code view.
 
 Here is the code we will be using for the first part:
 
@@ -246,9 +245,6 @@ void setup()
 
 void loop()
 {
-  // Wait one second so we don't sample the button too fast
-  delay(1000);
-
   // If the button is not pressed then turn off the LED ...
   if ( digitalRead(pin_button) ) {
     digitalWrite( pin_led, HIGH );
@@ -314,12 +310,10 @@ void setup()
 
 void loop()
 {
-  // Wait 3 seconds so we don't sample the button too fast
-  delay(1000);
-
   // If the IR sense motion then turn on the LED ...
   if ( analogRead( pin_ir ) > 2000 ) {
     digitalWrite( pin_led, HIGH );
+    delay(1000);
   }
 
   // ... else turn off the LED
@@ -344,7 +338,23 @@ Part 3b. Using a Button to Turn Servo Motor
 --------------------------------------------------------------------------
 
 This part is for the IoT output sub-group. If you are in an IoT input
-sub-group then you should work on Part 3a.
+sub-group then you should work on Part 3a. In this part, you will
+experiment with the servo motor, a simple motor which can rotate to a
+specified angle and then stay at that position. The following photo shows
+the implementation of the servo motor circuit.
+
+![](assets/fig/part3b-circuit.jpg)
+
+We plug the servo into the breadboard and then connect its three pins to
+the Photon board. Make sure you orient the servo motor correctly into the
+breadboard (with the yellow wire on top). Then connect the orange wire of
+the servo motor to pin D3 (shown using the orange jumper wire in the
+photo), connect the red wire of the servo motor to the 3.3V pin (shown
+using the red jumper wire in the photo), and connect the black wire of
+the IR rangefinder to the GND pin on the right side of the Photon board
+(shown using the black jumper wire in the photo). You might want to have
+an instructor double check your work. Once you have added your servo
+motor, then modify your code as shown below.
 
 ```c
 // Global constants for pin assignments
@@ -371,88 +381,66 @@ void setup()
 
 void loop()
 {
-  // Wait one second so we don't sample the button too fast
-  delay(1000);
-
   // If the button is not pressed then turn the servo to 0 ...
   if ( digitalRead(pin_button) ) {
     digitalWrite( pin_led, LOW );
     myservo.write(0);
+    delay(1000);
   }
 
-  // ... else if the button is pressed then turn the servo to 180
+  // ... else if the button is pressed then turn the servo to 90
   else {
     digitalWrite( pin_led, HIGH );
-    myservo.write(180);
+    myservo.write(90);
+    delay(1000);
   }
 }
 ```
+
+Notice that we are configuring yet another pin, `pir_servo`, for the
+output to control the servo motor. We also need to create a `Servo`
+object and attach the pin to this object in the `setup` routine. In the
+`loop` routine, we check if the button is pushed as before, but now if
+the button is pushed we turn the servo 90 degrees. If the button is not
+pushed we turn the servo to 0 degrees. Try setting the servo to turn to
+different angles when the button is pressed. The minimum is 0 and the
+maximum is 180 degrees.
+
+_Sign-Off Milestone:_ Once you have the button turning the servo motor,
+have an instructor verify that things are working correctly.
 
 Part 4a. Using an IR Sensor to Send IoT Message
 --------------------------------------------------------------------------
 
 This part is for the IoT input sub-group. If you are in an IoT output
 sub-group then you should work on Part 4b. You will not need to change
-your circuit for this part. All we need to do is add one line to our
-program to send a message to the IoT cloud every time an object is
-blocking the IR rangefinder. Modify your code as shown below.
+your circuit for this part. All we need to do is add the following line
+to your program to send a message to the IoT cloud every time an object
+is blocking the IR rangefinder.
 
 ```c
-// Global constants for pin assignments
-
-int pin_led    = D6;
-int pin_button = D5;
-int pin_ir     = A0;
-
-// The setup routine runs once when you press reset
-
-void setup()
-{
-  pinMode( pin_led,    OUTPUT       );
-  pinMode( pin_button, INPUT_PULLUP );
-  pinMode( pin_ir,     INPUT        );
-}
-
-// The loop routine runs over and over again
-
-void loop()
-{
-  // Wait 3 seconds so we don't sample the button too fast
-  delay(1000);
-
-  // If the IR sense motion then turn on the LED ...
-  if ( analogRead( pin_ir ) > 2000 ) {
-    digitalWrite( led, HIGH );
-
-    // Send a message to the IoT cloud
-    Spark.publish("ir","motion",10,PRIVATE);
-  }
-
-  // ... else turn off the LED
-  else {
-    digitalWrite( led, LOW );
-  }
-}
+Spark.publish("ir","motion",10,PRIVATE);
 ```
 
-The `Spark.publish` statement sends a message named "ir" to the cloud
-every time the IR rangefinder returns a value above the threshold. You
-can verify this is working by using the Photon smartphone app. Login
-using the same username/password you used to login to the web-based
-development environment. Select the correct Photon board (i.e.,
-`photon.group.0X.A`). Then choose the "events" tab. You should see an
-event pop up every time your Photon board sends a message to the IoT
-cloud.
+This statement sends a message named "ir" to the cloud every time the IR
+rangefinder returns a value above the threshold. You can verify this is
+working by watching the console. Click on the console button and you
+should see a "ir/motion" even show up every time you trigger the IR
+rangefinder.
 
 _Sign-Off Milestone:_ Once you have verified that your IoT input device
 is able to send messages to the IoT cloud, show an instructor by using
-the smartphone app.
+the console.
 
 Part 4b. Using an IoT Message to Turn Servo Motor
 --------------------------------------------------------------------------
 
 This part is for the IoT output sub-group. If you are in an IoT input
-sub-group then you should work on Part 4a.
+sub-group then you should work on Part 4a. You will not need to change
+your circuit for this part. We need to modify our code to wait for an IoT
+message, and when this message is received we want to turn the servo.
+Modify your code as shown below.
+
 
 ```c
 // Global constants for pin assignments
@@ -487,20 +475,53 @@ void loop()
 
 void move_servo( const char *event, const char *data )
 {
-  // Turn on the LED
-  digitalWrite( pin_led, HIGH );
-
-  // Move the servo
-  myservo.write(180);
-
-  // Wait three seconds
-  delay(3000);
-
-  // Move the servo back
-  myservo.write(0);
-
-  // Turn off the LED
-  digitalWrite( pin_led, LOW );
+  // Add code to ...
+  // 1. Turn on the LED
+  // 2. Move the servo
+  // 3. Wait three seconds
+  // 4. Move the servo back
+  // 5. Turn off the LED
 }
 ```
+
+Notice that the `loop` routine is empty, and we have added a new
+`move_servo` routine. The `Particle.subscribe` routine is used to tell
+the IoT cloud that we would like this Photon board to receive "ir"
+messages from the IoT cloud, and that when we receive such a message the
+system should automatically call the `move_servo` routine. So instead of
+using the `loop` routine to control our Photon board, we will instead
+setup our code so that the `move_servo` routine is called whenever a
+different Photon board sends the "ir" message. Fill in the `move_servo`
+routine with five statements to: (1) turn of the LED; (2) move the servo
+to 180 degrees; (3) wait three seconds; (4) move the servo back to zero
+degrees; and (4) turn off the LED.
+
+_Sign-Off Milestone:_ Before downloading your code to the Photon board,
+have an instructor verify it is correct.
+
+Part 5. Putting Together the IoT System
+--------------------------------------------------------------------------
+
+We are now ready to put together the IoT input device and the IoT output
+device into a complete IoT system! All we need to do is have the IoT
+output sub-group download their code to their Photon board. Try
+triggering the IR rangefinder on the IoT input device, verify the LED on
+the IoT input device goes on, use the console to see that the message was
+sent into the IoT cloud, verify that the LED on the IoT output device
+goes on, and then confirm that the servo rotates. Once this all works, it is now time to polish up the IoT system a bit.
+
+First, attach the IR rangefinder to the included black L-bracket mount
+and then hot glue it to the black base plate for the IoT input device.
+Use the 9V battery and the corresponding battery connector to power the
+IoT input device. Your IoT input device is now mobile; you can position
+it anywhere around the lab or even in the hallway or atrium.
+
+Second, attach the servo to the included aluminum brackets. Your servo
+probably has a white wheel on it. Remove this white wheel and attach the
+white straight piece. Hot glue the wooden rod onto this white piece so
+that when the servo moves it swings the rod. Request a tabletop wind
+chime from the instructors. Duct tape the servo to the lab bench so that
+when the rod swings it gently rings the tabletop wind chime.
+
+Test the whole thing out and make a video to share with your friends!
 
