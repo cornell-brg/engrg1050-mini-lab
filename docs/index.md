@@ -398,7 +398,7 @@ void loop()
 }
 ```
 
-Notice that we are configuring yet another pin, `pir_servo`, for the
+Notice that we are configuring yet another pin, `pin_servo`, for the
 output to control the servo motor. We also need to create a `Servo`
 object and attach the pin to this object in the `setup` routine. In the
 `loop` routine, we check if the button is pushed as before, but now if
