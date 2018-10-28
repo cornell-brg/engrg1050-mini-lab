@@ -17,10 +17,6 @@ ENGRG 1050: Computer Engineering Mini-Lab
  - Part 4b. Using an IoT Message to Turn Servo Motor
  - Part 5. Putting Together the IoT System
 
-**Video of Final System**
-
-<iframe width="560" height="315" src="https://www.youtube.com/embed/IU9CGH4rbcI" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-
 Introduction
 --------------------------------------------------------------------------
 
@@ -50,7 +46,9 @@ device will trigger the servo motor to ring a delightfully pleasant
 tabletop wind chime. This IoT system is a simple example of emerging
 "smart homes" where various input and devices work together through the
 cloud to automate daily tasks and (hopefully) improve the overall quality
-of our lives.
+of our lives. This is a video of the final system in action:
+
+<iframe width="640" height="385" src="https://www.youtube.com/embed/IU9CGH4rbcI" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 
 We will use an incremental process to building this IoT system. First, we
 will divide each group of four students into two sub-groups with two
