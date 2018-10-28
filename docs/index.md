@@ -17,6 +17,10 @@ ENGRG 1050: Computer Engineering Mini-Lab
  - Part 4b. Using an IoT Message to Turn Servo Motor
  - Part 5. Putting Together the IoT System
 
+**Video of Final System**
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/IU9CGH4rbcI" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+
 Introduction
 --------------------------------------------------------------------------
 
